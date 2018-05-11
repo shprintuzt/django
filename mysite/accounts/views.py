@@ -1,7 +1,15 @@
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
+from django.template import loader
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
+def myview(request):
+    template = loader.get_template('myview.html')
+    context = {}
+    return HttpResponse(template.render(context, request))
 
-def my_view(request):
-    if not request.user.is_authenticated:
-        return render(request, 'mysite/login_error.html')
+def logged_out(request):
+    logout(request)
+    return HttpResponseRedirect('/accounts/')

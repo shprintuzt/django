@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
-    <title>{% if request.path != '/' %}{% block title %}{% endblock %} | {% endif %}Poll app with Auth | Django Tutorial"{% user.name %}"</title>
+    <title>{% if request.path != '/' %}{% block title %}{% endblock %} | {% endif %}Poll app with Auth | Django Tutorial</title>
 </head>
 <body>
 <div class="container">
@@ -14,11 +14,10 @@
         <nav>
             <ul>
                 {% if user.is_authenticated %}
-                <li><a href="{% url 'logout' %}" class="logout">Logout</a></li>
+                <li><a href="{% url 'login' %}" class="login">Logout</a></li>
                 {% else %}
                 <li><a href="{% url 'login' %}" class="login">Login</a></li>
                 {% endif %}
-		<li><a href="{% url 'polls:index' %}" class="act">Polls</a></li>
             </ul>
         </nav>
     </header>
