@@ -1,0 +1,30 @@
+{% extends 'sampleapp/base.html' %}
+{% block content %}
+
+<a href="{% url 'sampleapp:week_with_schedule' week.previous.year week.previous.month week.previous.day %}">Prev</a>
+{{ week.first | date:"Y/m/d" }}~{{ week.last | date:"Y/m/d" }}
+<a href="{% url 'sampleapp:week_with_schedule' week.next.year week.next.month week.next.day %}">Next</a>
+<table class="table table-bordered">
+ <tbody>
+  <tr>
+   {% for week_name, day, day_schedule_list in week_row %}
+    <td>
+     {{ week_name }}
+    <br>
+    {% if week.first.month != day.month %}
+     {{ day | date:"m/d" }}
+    {% else %}
+     {{ day.day }}
+    {% endif %}
+    <br>
+    {% for s in day_schedule_list %}
+     {{ s.start_time }} - {{ s.end_time }}<br>
+     {{ s.summary }}<br>
+     {{ s.description | linebreaks }}
+    {% endfor %}
+    </td>
+   {% endfor %}
+  </tr>
+ </tbody>
+</table>
+{% endblock %}

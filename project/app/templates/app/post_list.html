@@ -1,0 +1,26 @@
+{% extends "app/base.html" %}
+{% block content %}
+ {% if perms.app.add_message %}
+  <p><a href="{% url 'app:add' %}">add</a></p>
+ {% endif %}
+ 
+ {% if perms.auth.add_user %}
+  <p><a href="{% url 'app:create_user' %}">add user</a></p>
+ {% endif %}
+ 
+ <hr>
+ {% for message in message_list %}
+  <p>
+   {{ message.text }}
+   
+   {% if perms.app.change_message %}
+    <a href="{% url 'app:change' message.pk %}">change</a>
+   {% endif %}
+   
+   {% if perms.app.delete_message %}
+    <a href="{% url 'app:delete' message.pk %}">delete</a>
+   {% endif %}
+   
+  </p>
+ {% endfor %}
+{% endblock %}

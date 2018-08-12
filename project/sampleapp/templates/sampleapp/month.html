@@ -1,0 +1,37 @@
+{% extends "sampleapp/base.html" %}
+{% block content %}
+
+<a href="{% url 'sampleapp:month' month.previous.year month.previous.month %}">Prev</a>
+{{ month.current | date:"Y/m" }}
+<a href="{% url 'sampleapp:month' month.next.year month.next.month %}">Next</a>
+<table class="table">
+ <thead>
+  <tr>
+   {% for w in month.week_names %}
+    <th>{{ w }}</th>
+   {% endfor %}
+  </tr>
+ </thead>
+ <tbody>
+  {% for week in month.days %}
+   <tr>
+    {% for day in week %}
+     {% if month.now == day %}
+      <td class="table-success">
+     {% else %}
+      <td>
+     {% endif %}
+     {% if month.corrent.month != day.month %}
+      {{ day | date:"m/d" }}
+     {% else %}
+      {{ day.day }}
+     {% endif %}
+      </td>
+    {% endfor %}
+   </tr>
+  {% endfor %}
+ </tbody>
+</table>
+{% endblock %}
+    
+     

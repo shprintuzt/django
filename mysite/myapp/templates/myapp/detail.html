@@ -1,0 +1,12 @@
+<p>{{ group.groups__name }}</p>
+<a href="{% url 'myapp:top' %}">Top</a>
+{% if user_list %}
+ <p>Group Member</p>
+ <ul>
+  {% for user in user_list %}
+   <li>{{ user.username }}</li>
+  {% endfor %}
+ </ul>
+{% else %}
+ <p>No users are registered.</p>
+{% endif %}

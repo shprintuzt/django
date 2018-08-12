@@ -1,0 +1,10 @@
+Dear {{ user.username }},
+
+Thank you for registering our site.
+Please complete your registration by accessing below URL.
+Your registration have not done yet.
+
+Registration URL
+{{ protocol }}://{{ domain }}{% url 'register:user_create_complete' token %}
+
+django_gotoh

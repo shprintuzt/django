@@ -1,0 +1,15 @@
+<p>{{ user.username }}</p>
+<br>
+<a href="{% url 'myapp:logout' %}">Logout</a>
+<br>
+<a href="{% url 'myapp:create_group' %}">Create Group</a>
+
+{% if group_list %}
+ <ul>
+  {% for group in group_list %}
+   <li><a href="{% url 'myapp:detail_group' group.name %}">{{ group.name }}</a></li>
+  {% endfor %}
+ </ul>
+{% else %}
+ <p>No groups are available.</p>
+{% endif %}
