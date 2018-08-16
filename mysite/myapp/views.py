@@ -19,19 +19,19 @@ class OnlyYouMixin(UserPassesTestMixin):
         user = self.request.user
         return user.pk == self.kwargs['pk'] or user.is_superuser
 
-class Top(generic.ListView, LoginRequiredMixin):
+class Top(LoginRequiredMixin, generic.ListView):
     template_name = 'myapp/top.html'
     context_object_name = 'group_list'
     
     def get_queryset(self):
-        user = self.request.user
-        return Group.objects.filter(user=user.pk)
+#        user = self.request.user
+        return Group.objects.all()#filter(user=user.pk)
         
 class Login(LoginView):
     form_class = LoginForm
     template_name = 'myapp/login.html'
     
-class CreateGroup(generic.CreateView, LoginRequiredMixin):
+class CreateGroup(LoginRequiredMixin, generic.CreateView):
     model = Group
     form_class = CreateForm
     template_name = 'myapp/create.html'
@@ -45,7 +45,7 @@ class CreateGroup(generic.CreateView, LoginRequiredMixin):
         messages.warning(self.request, "Failed to save")
         return super().form_invalid(form)
 
-class DetailGroup(generic.ListView, LoginRequiredMixin):
+class DetailGroup(LoginRequiredMixin, generic.ListView):
     model = User
     template_name = 'myapp/detail.html'
     context_object_name = 'user_list'

@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'myapp.apps.MyappConfig',
     'accounts.apps.AccountsConfig',
     'polls.apps.PollsConfig',
+    'manytomany',
 #    'users',
     'django.contrib.admin',
     'django.contrib.auth',
